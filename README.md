@@ -4,7 +4,7 @@
 
 - pynvim
 	- `pip3 install pynvim`
-- nodejs
+- node.js
 	- `curl -sL install-node.now.sh/lts | bash`
 - ctags
 
