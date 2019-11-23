@@ -8,11 +8,11 @@
 " Author: rescld <root@rescld.cn>                  |
 " Repository: https://github.com/rescld-code/nvim  |
 " Create Date: 2019-11-20                          |
+" Update Date: 2019-11-23                          |
 "———————————————————————————————————————————————————
 
-set nu
+set nofoldenable
 set relativenumber
-set syntax=on
 set autoread
 set completeopt=preview,menu
 set cursorline
@@ -29,7 +29,7 @@ set enc=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set showcmd
 set wildmenu
-set scrolloff=5
+set scrolloff=10
 set t_Co=256
 set virtualedit=block,onemore
 set whichwrap+=<,>,h,l
@@ -100,7 +100,7 @@ Plug 'yuezk/vim-js'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'jelera/vim-javascript-syntax'
 
-" color
+" colorscheme
 Plug 'liuchengxu/space-vim-dark'
 
 " navigation
@@ -116,7 +116,7 @@ Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " ===
-" === color
+" === colorscheme
 " ===
 colorscheme space-vim-dark
 set termguicolors
@@ -279,8 +279,8 @@ inoremap <silent> <leader>m <esc> :TagbarToggle<cr>
 " ===
 " === buffer
 " ===
-nnoremap <c-n> :NextBuffer<cr>
-nnoremap <c-m> :PreviousBuffer<cr>
+nnoremap <c-m> :NextBuffer<cr>
+nnoremap <c-n> :PreviousBuffer<cr>
 
 " ===
 " === vim-edit
@@ -294,9 +294,10 @@ nnoremap C :ChangeText<cr>
 " ===
 map su :set splitright<CR>:vsp<CR>
 map si :set splitbelow<CR>:sp<CR>
-map <c-h> <c-w>h map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 " ===
 " === Test
@@ -315,6 +316,12 @@ function! Test()
 		silent! exec "!google-chrome % &"
 	elseif &filetype == 'markdown'
 		exec "MarkdownPreview"
+	elseif &filetype == 'cpp' || &filetype == 'c'
+		set splitbelow
+		exec "!g++ -std=c++11 % -Wall -o %<"
+		:sp
+		:res -15
+		:term ./%<
 	endif
 endfunction
 

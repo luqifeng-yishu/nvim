@@ -2,6 +2,7 @@
 
 ### Required Env
 
+- neovim >= 4.0
 - pynvim
 	- `pip3 install pynvim`
 - node.js
@@ -58,8 +59,8 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 
 | Shortcut   | Action         |
 | :-         | :-             |
-| `Ctrl` + n | NextBuffer     |
-| `Ctrl` + m | PreviousBuffer |
+| `Ctrl` + m | NextBuffer     |
+| `Ctrl` + n | PreviousBuffer |
 
 #### vim-multiple-cursors
 
