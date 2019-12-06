@@ -11,6 +11,7 @@
 " Update Date: 2019-11-23                          |
 "———————————————————————————————————————————————————
 
+set number
 set nofoldenable
 set relativenumber
 set autoread
@@ -238,7 +239,7 @@ let g:NERDTreeIndicatorMapCustom = {
 " ===
 " === vim-go
 " ===
-let g:go_template_autocreate = 0
+let g:go_template_autocreate = 1
 let g:go_textobj_enabled = 0
 let g:go_auto_type_info = 1
 let g:go_def_mapping_enabled = 1
@@ -300,7 +301,7 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
 " ===
-" === Test
+" === Run code
 " ===
 map <F5> :call Test()<CR>
 function! Test()
@@ -320,7 +321,6 @@ function! Test()
 		set splitbelow
 		exec "!g++ -std=c++11 % -Wall -o %<"
 		:sp
-		:res -15
 		:term ./%<
 	endif
 endfunction
@@ -345,7 +345,7 @@ noremap <C-x> ea<C-x>s
 inoremap <C-x> <C-x>s
 
 " ===
-" === find next <++>
+" === find next
 " ===
 map <space><space> <ESC>/<++><CR>:nohlsearch<CR>c4l
 
