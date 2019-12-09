@@ -76,10 +76,6 @@ Plug 'theniceboy/bullets.vim'
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-
 " python
 Plug 'tmhedberg/SimpylFold'
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
@@ -184,7 +180,7 @@ inoremap <silent><expr> <TAB>
 	\ coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
-let g:coc_global_extensions = ['coc-python', 'coc-go', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -237,33 +233,6 @@ let g:NERDTreeIndicatorMapCustom = {
 			\}
 
 " ===
-" === vim-go
-" ===
-let g:go_template_autocreate = 1
-let g:go_textobj_enabled = 0
-let g:go_auto_type_info = 1
-let g:go_def_mapping_enabled = 1
-let g:go_highlight_array_whitespace_error    = 1
-let g:go_highlight_build_constraints         = 1
-let g:go_highlight_chan_whitespace_error     = 1
-let g:go_highlight_extra_types               = 1
-let g:go_highlight_fields                    = 1
-let g:go_highlight_format_strings            = 1
-let g:go_highlight_function_calls            = 1
-let g:go_highlight_function_parameters       = 1
-let g:go_highlight_functions                 = 1
-let g:go_highlight_generate_tags             = 1
-let g:go_highlight_methods                   = 1
-let g:go_highlight_operators                 = 1
-let g:go_highlight_space_tab_error           = 1
-let g:go_highlight_string_spellcheck         = 1
-let g:go_highlight_structs                   = 1
-let g:go_highlight_trailing_whitespace_error = 1
-let g:go_highlight_types                     = 1
-let g:go_highlight_variable_assignments      = 0
-let g:go_highlight_variable_declarations     = 0
-
-" ===
 " === tabular
 " ===
 nnoremap <leader>l :Tab /\|<cr>
@@ -303,16 +272,17 @@ nnoremap <c-l> <c-w>l
 " ===
 " === Run code
 " ===
-map <F5> :call Test()<CR>
-function! Test()
+map <F5> :call Run()<CR>
+function! Run()
+	exec "w"
 	if &filetype == 'go'
 		exec ":set splitbelow"
 		:sp
-		:term go run %
+		:terminal go run %
 	elseif &filetype == 'python'
 		exec ":set splitbelow"
 		:sp
-		:term python3 %
+		:terminal python3 %
 	elseif &filetype == 'html'
 		silent! exec "!google-chrome % &"
 	elseif &filetype == 'markdown'
@@ -321,14 +291,21 @@ function! Test()
 		set splitbelow
 		exec "!g++ -std=c++11 % -Wall -o %<"
 		:sp
-		:term ./%<
+		:terminal ./%<
+	elseif &filetype == 'java'
+		set splitbelow
+		exec "!find . -name '*.java' > temp"
+		exec "!javac -d bin/ @temp"
+		exec "!rm temp"
+		:sp
+		:terminal cd bin/&&java Main
 	endif
 endfunction
 
 " ===
 " === terminal
 " ===
-map <F4> :set splitright<CR>:vsp<CR>:term<CR>i
+map <F4> :set splitright<CR>:vsp<CR>:terminal<CR>i
 
 " ===
 " === tab
