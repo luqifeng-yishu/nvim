@@ -8,10 +8,11 @@
 " Author: rescld <root@rescld.cn>                  |
 " Repository: https://github.com/rescld-code/nvim  |
 " Create Date: 2019-11-20                          |
-" Update Date: 2019-11-23                          |
+" Update Date: 2019-12-20                          |
 "———————————————————————————————————————————————————
 
 set number
+set clipboard+=unnamedplus
 set nofoldenable
 set relativenumber
 set autoread
@@ -40,17 +41,25 @@ silent !mkdir -p ~/.config/nvim/tmp/undo
 set backupdir=~/.config/nvim/tmp/backup,.
 set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
-	set undofile
-	set undodir=~/.config/nvim/tmp/undo,.
+set undofile
+set undodir=~/.config/nvim/tmp/undo,.
 endif
 
+" === 
+" === other config
+" === 
 let mapleader = "," 
+map I $
+map W :w<CR>
+map <c-p> :FZF<CR>
 map R :source $MYVIMRC<CR>
 map <space><CR> :nohlsearch<CR>
+inoremap qq <esc>
 filetype indent on
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'junegunn/vim-peekaboo'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
@@ -59,11 +68,13 @@ Plug 'rhysd/clever-f.vim'
 Plug 'mhinz/vim-startify'
 Plug 'itchyny/vim-cursorword'
 Plug 'terryma/vim-multiple-cursors'
+" Plug 'sillybun/vim-repl'
 
 " chxuan
 Plug 'chxuan/tagbar'
-Plug 'chxuan/vim-buffer'
+" Plug 'chxuan/vim-buffer'
 Plug 'chxuan/vim-edit'
+Plug 'chxuan/prepare-code'
 
 " airline
 Plug 'vim-airline/vim-airline'
@@ -87,11 +98,10 @@ Plug 'tweekmonster/braceless.vim'
 " cpp
 Plug 'octol/vim-cpp-enhanced-highlight'
 
-" HTML, CSS, JavaScript, PHP, JSON, etc.
+" HTML, CSS, JavaScript, JSON, etc.
 Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html','javascript', 'css', 'less'] }
+Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'html','javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
 Plug 'yuezk/vim-js'
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -128,7 +138,7 @@ let g:airline_theme = "dracula"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+let g:airline_symbols = {}
 endif
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -147,14 +157,14 @@ let g:mkdp_open_ip = ''
 let g:mkdp_echo_preview_url = 0
 let g:mkdp_browserfunc = ''
 let g:mkdp_preview_options = {
-			\ 'mkit': {},
-			\ 'katex': {},
-			\ 'uml': {},
-			\ 'maid': {},
-			\ 'disable_sync_scroll': 0,
-			\ 'sync_scroll_type': 'middle',
-			\ 'hide_yaml_meta': 1
-			\ }
+		\ 'mkit': {},
+		\ 'katex': {},
+		\ 'uml': {},
+		\ 'maid': {},
+		\ 'disable_sync_scroll': 0,
+		\ 'sync_scroll_type': 'middle',
+		\ 'hide_yaml_meta': 1
+		\ }
 let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
 let g:mkdp_port = ''
@@ -164,29 +174,30 @@ let g:mkdp_page_title = '「${name}」'
 " === Bullets.vim
 " ===
 let g:bullets_enabled_file_types = [
-			\ 'markdown',
-			\ 'text',
-			\ 'gitcommit',
-			\ 'scratch'
-			\]
+		\ 'markdown',
+		\ 'text',
+		\ 'gitcommit',
+		\ 'scratch'
+		\]
 
 " ===
 " === coc
 " ===
 let g:prepare_code_plugin_path = expand($HOME . "/.config/nvim/plugged/prepare-code")
 inoremap <silent><expr> <TAB>
-	\ pumvisible() ? "\<C-n>" :
-	\ <SID>check_back_space() ? "\<TAB>" :
-	\ coc#refresh()
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
 let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>p :CocList -A --normal yank<CR>
 
 " ===
 " === Python-syntax
@@ -221,23 +232,22 @@ let g:NERDTreeDirArrowCollapsible='▼'
 " == NERDTree-git
 " ==
 let g:NERDTreeIndicatorMapCustom = {
-			\ "Modified": "✹",
-			\ "Staged": "✚",
-			\ "Untracked" : "✭",
-			\ "Renamed" : "➜",
-			\ "Unmerged": "═",
-			\ "Deleted" : "✖",
-			\ "Dirty" : "✗",
-			\ "Clean" : "✔︎",
-			\ "Unknown" : "?"
-			\}
+		\ "Modified": "✹",
+		\ "Staged": "✚",
+		\ "Untracked" : "✭",
+		\ "Renamed" : "➜",
+		\ "Unmerged": "═",
+		\ "Deleted" : "✖",
+		\ "Dirty" : "✗",
+		\ "Clean" : "✔︎",
+		\ "Unknown" : "?"
+		\}
 
 " ===
 " === tabular
 " ===
 nnoremap <leader>l :Tab /\|<cr>
 nnoremap <leader>= :Tab /=<cr>
-nnoremap <leader>:= :Tab /:=<cr>
 
 " ===
 " === tagbar
@@ -249,8 +259,8 @@ inoremap <silent> <leader>m <esc> :TagbarToggle<cr>
 " ===
 " === buffer
 " ===
-nnoremap <c-m> :NextBuffer<cr>
-nnoremap <c-n> :PreviousBuffer<cr>
+" nnoremap <c-m> :NextBuffer<cr>
+" nnoremap <c-n> :PreviousBuffer<cr>
 
 " ===
 " === vim-edit
@@ -275,12 +285,8 @@ nnoremap <c-l> <c-w>l
 map <F5> :call Run()<CR>
 function! Run()
 	exec "w"
-	if &filetype == 'go'
-		exec ":set splitbelow"
-		:sp
-		:terminal go run %
-	elseif &filetype == 'python'
-		exec ":set splitbelow"
+	if &filetype == 'python'
+		set splitbelow
 		:sp
 		:terminal python3 %
 	elseif &filetype == 'html'
@@ -289,16 +295,16 @@ function! Run()
 		exec "MarkdownPreview"
 	elseif &filetype == 'cpp' || &filetype == 'c'
 		set splitbelow
-		exec "!g++ -std=c++11 % -Wall -o %<"
+		exec "!g++ -std=c++11 % -Wall -o ./bin/%<"
 		:sp
-		:terminal ./%<
+		:terminal ./bin/%<
 	elseif &filetype == 'java'
 		set splitbelow
 		exec "!find . -name '*.java' > temp"
 		exec "!javac -d bin/ @temp"
 		exec "!rm temp"
 		:sp
-		:terminal cd bin/&&java Main
+		:terminal cd ~/java/bin/&&java Main
 	endif
 endfunction
 
@@ -311,8 +317,8 @@ map <F4> :set splitright<CR>:vsp<CR>:terminal<CR>i
 " === tab
 " ===
 map eu :tabe<CR>
-map eh :-tabnext<CR>
-map el :+tabnext<CR>
+map <C-m> :-tabnext<CR>
+map <C-n> :+tabnext<CR>
 
 " ===
 " === spell check and change
@@ -333,4 +339,13 @@ let g:multi_cursor_next_key = '<C-n>'
 let g:multi_cursor_skip_key = '<C-x>'
 let g:multi_cursor_start_word_key = '<C-t>'
 
+" === 
+" === prepare code
+" === 
+let g:prepare_code_plugin_path = expand($HOME . "/.config/nvim/plugged/prepare-code")
+
+" === 
+" === python path
+" === 
+let g:python_host_prog="/usr/bin/python"
 let g:python3_host_prog="/usr/bin/python3"

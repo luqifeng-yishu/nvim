@@ -21,15 +21,16 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 
 ### Keyboard Shortcuts
 
-| Shortcut        | Action                   |
-| :-              | :-                       |
-| `<leader>`      | `,`                      |
-| `<leader>` + n  | NERDTreeToggle           |
-| `<leader>` + m  | TagbarToggle             |
-| `<leader>` + sp | Spelling check           |
-| `Ctrl` + x      | Modifying word           |
-| `<F5>`          | Run code                 |
-| `<F4>`          | Create a termal to right |
+| Shortcut      | Action                     |
+| :-            | :-                         |
+| `<leader>`    | `,`                        |
+| `<leader>` n  | NERDTreeToggle             |
+| `<leader>` m  | TagbarToggle               |
+| `<leader>` sp | Spelling check             |
+| `Ctrl` + x    | Modifying word             |
+| `Ctrl` + p    | FZF                        |
+| `<F5>`        | Run code                   |
+| `<F4>`        | Create a terminal to right |
 
 #### split window
 
@@ -40,11 +41,11 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 
 #### tabe
 
-| Shortcut | Action           |
-| :-       | :-               |
-| eu       | Create a new tab |
-| eh       | Go one tab left  |
-| el       | Go one tab right |
+| Shortcut   | Action           |
+| :-         | :-               |
+| eu         | Create a new tab |
+| `Ctrl` + n | Go one tab left  |
+| `Ctrl` + m | Go one tab right |
 
 #### remove cursor
 
@@ -54,13 +55,6 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 | `Ctrl` + j | Move cursor one window down  |
 | `Ctrl` + k | Move cursor one window up    |
 | `Ctrl` + l | Move cursor one window right |
-
-#### buffer
-
-| Shortcut   | Action         |
-| :-         | :-             |
-| `Ctrl` + m | NextBuffer     |
-| `Ctrl` + n | PreviousBuffer |
 
 #### vim-multiple-cursors
 
