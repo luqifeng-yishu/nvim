@@ -3,8 +3,9 @@
 ### Required Env
 
 - neovim >= 4.0
-- pynvim
+- python
 	- `pip3 install pynvim`
+	- `pip3 install python-language-server`
 - node.js
 	- `curl -sL install-node.now.sh/lts | bash`
 - ctags
@@ -28,7 +29,7 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 | `<leader>` m  | TagbarToggle               |
 | `<leader>` sp | Spelling check             |
 | `Ctrl` + x    | Modifying word             |
-| `Ctrl` + p    | FZF                        |
+| `Ctrl` + p    | Open FZF                   |
 | `<F5>`        | Run code                   |
 | `<F4>`        | Create a terminal to right |
 
@@ -39,13 +40,12 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 | su       | Split screen to right |
 | si       | Split screen to below |
 
-#### tabe
+#### buffers
 
-| Shortcut   | Action           |
-| :-         | :-               |
-| eu         | Create a new tab |
-| `Ctrl` + n | Go one tab left  |
-| `Ctrl` + m | Go one tab right |
+| Shortcut   | Action              |
+| :-         | :-                  |
+| `Ctrl` + n | Go one buffer left  |
+| `Ctrl` + m | Go one buffer right |
 
 #### remove cursor
 
@@ -54,7 +54,7 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 | `Ctrl` + h | Move cursor one window left  |
 | `Ctrl` + j | Move cursor one window down  |
 | `Ctrl` + k | Move cursor one window up    |
-| `Ctrl` + l | Move cursor one window right |
+| `Ctrl` + l | Move cursor one window right | 
 
 #### vim-multiple-cursors
 
@@ -63,3 +63,13 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 | `Ctrl` + t | Start                           |
 | `Ctrl` + n | Create a new cursor to next key |
 | `Ctrl` + x | Skip the key                    |
+
+#### vim-bookmarks
+
+| Shortcut     | Action                                        |
+| :-           | :-                                            |
+| ma           | Add/remove bookmark at current line           |
+| mn           | Jump to next bookmark in buffer               |
+| mp           | Jump to previous bookmark in buffer           |
+| md           | Clear bookmarks in all buffers                |
+| `<leader>` g | Move bookmark at current line to another line |

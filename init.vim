@@ -59,6 +59,10 @@ filetype indent on
 
 call plug#begin('~/.config/nvim/plugged')
 
+" navigation
+Plug 'francoiscabrol/ranger.vim'
+Plug 'nine2/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
 Plug 'junegunn/vim-peekaboo'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jiangmiao/auto-pairs'
@@ -68,11 +72,10 @@ Plug 'rhysd/clever-f.vim'
 Plug 'mhinz/vim-startify'
 Plug 'itchyny/vim-cursorword'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'sillybun/vim-repl'
+Plug 'MattesGroeger/vim-bookmarks'
 
 " chxuan
 Plug 'chxuan/tagbar'
-" Plug 'chxuan/vim-buffer'
 Plug 'chxuan/vim-edit'
 Plug 'chxuan/prepare-code'
 
@@ -83,6 +86,11 @@ Plug 'vim-airline/vim-airline-themes'
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'theniceboy/bullets.vim'
+
+" git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -110,15 +118,14 @@ Plug 'jelera/vim-javascript-syntax'
 " colorscheme
 Plug 'liuchengxu/space-vim-dark'
 
-" navigation
+"NERDTree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" fzf
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'nine2/vim-indent-guides'
-Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -134,7 +141,7 @@ hi SignColumn ctermbg=NONE guibg=NONE
 " ===
 " === airline
 " ===
-let g:airline_theme = "dracula"
+let g:airline_theme = "deus theme"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
@@ -257,10 +264,10 @@ nnoremap <silent> <leader>m :TagbarToggle<cr>
 inoremap <silent> <leader>m <esc> :TagbarToggle<cr>
 
 " ===
-" === buffer
+" === buffers
 " ===
-" nnoremap <c-m> :NextBuffer<cr>
-" nnoremap <c-n> :PreviousBuffer<cr>
+nnoremap <c-m> :bprevious<cr>
+nnoremap <c-n> :bNext<cr>
 
 " ===
 " === vim-edit
@@ -278,6 +285,10 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
+nnoremap <up> :res +5<CR>
+nnoremap <down> :res -5<CR>
+nnoremap <left> :vertical resize-5<CR>
+nnoremap <right> :vertical resize+5<CR>
 
 " ===
 " === Run code
@@ -316,9 +327,9 @@ map <F4> :set splitright<CR>:vsp<CR>:terminal<CR>i
 " ===
 " === tab
 " ===
-map eu :tabe<CR>
-map <C-m> :-tabnext<CR>
-map <C-n> :+tabnext<CR>
+" map eu :tabe<CR>
+" map <C-m> :-tabnext<CR>
+" map <C-n> :+tabnext<CR>
 
 " ===
 " === spell check and change
@@ -343,6 +354,24 @@ let g:multi_cursor_start_word_key = '<C-t>'
 " === prepare code
 " === 
 let g:prepare_code_plugin_path = expand($HOME . "/.config/nvim/plugged/prepare-code")
+
+" ===
+" === vim-bookmarks
+" ===
+let g:bookmark_no_default_key_mappings = 1
+nmap ma <Plug>BookmarkToggle
+nmap mn <Plug>BookmarkNext
+nmap mp <Plug>BookmarkPrev
+nmap md <Plug>BookmarkClearAll
+nmap <Leader>g <Plug>BookmarkMoveToLine
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
+let g:bookmark_highlight_lines = 1
+let g:bookmark_manage_per_buffer = 1
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_center = 1
+let g:bookmark_auto_close = 1
+let g:bookmark_location_list = 1
 
 " === 
 " === python path
