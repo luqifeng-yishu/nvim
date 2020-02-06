@@ -141,7 +141,7 @@ hi SignColumn ctermbg=NONE guibg=NONE
 " ===
 " === airline
 " ===
-let g:airline_theme = "deus theme"
+let g:airline_theme = "violet"
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
@@ -156,7 +156,7 @@ let g:airline_right_alt_sep = ''
 " === MarkdownPreview
 " ===
 let g:mkdp_auto_start = 1
-let g:mkdp_auto_close = 0
+let g:mkdp_auto_close = 1
 let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
 let g:mkdp_open_to_the_world = 0
@@ -190,7 +190,6 @@ let g:bullets_enabled_file_types = [
 " ===
 " === coc
 " ===
-let g:prepare_code_plugin_path = expand($HOME . "/.config/nvim/plugged/prepare-code")
 inoremap <silent><expr> <TAB>
 \ pumvisible() ? "\<C-n>" :
 \ <SID>check_back_space() ? "\<TAB>" :
@@ -297,16 +296,22 @@ map <F5> :call Run()<CR>
 function! Run()
 	exec "w"
 	if &filetype == 'python'
-		set splitbelow
-		:sp
-		:terminal python3 %
+		:!python3 %
+		" set splitbelow
+		" :sp
+		" :terminal python3 %
 	elseif &filetype == 'html'
-		silent! exec "!google-chrome % &"
+		silent! exec "!google-chrome-stable % &"
 	elseif &filetype == 'markdown'
 		exec "MarkdownPreview"
-	elseif &filetype == 'cpp' || &filetype == 'c'
+	elseif &filetype == 'cpp'
 		set splitbelow
-		exec "!g++ -std=c++11 % -Wall -o ./bin/%<"
+		exec "!g++ % -Wall -o ./bin/%<"
+		:sp
+		:terminal ./bin/%<
+	elseif &filetype == 'c'
+		set splitbelow
+		exec "!gcc % -Wall -o ./bin/%<"
 		:sp
 		:terminal ./bin/%<
 	elseif &filetype == 'java'
