@@ -8,11 +8,11 @@
 " Author: rescld <root@rescld.cn>                  |
 " Repository: https://github.com/rescld-code/nvim  |
 " Create Date: 2019-11-20                          |
-" Update Date: 2019-12-20                          |
+" Update Date: 2020-02-08                          |
 "———————————————————————————————————————————————————
 
 set number
-set clipboard+=unnamedplus
+set clipboard+=unnamedplus " yay -S xsel
 set nofoldenable
 set relativenumber
 set autoread
@@ -35,6 +35,9 @@ set scrolloff=10
 set t_Co=256
 set virtualedit=block,onemore
 set whichwrap+=<,>,h,l
+set nowrap
+
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
@@ -50,7 +53,7 @@ endif
 " === 
 let mapleader = "," 
 map I $
-map W :w<CR>
+map <c-s> :w<CR>
 map <c-p> :FZF<CR>
 map R :source $MYVIMRC<CR>
 map <space><CR> :nohlsearch<CR>
@@ -85,6 +88,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'theniceboy/bullets.vim'
 
 " git
@@ -133,10 +137,12 @@ call plug#end()
 " === colorscheme
 " ===
 colorscheme space-vim-dark
-set termguicolors
+" set termguicolors
 hi Normal     ctermbg=NONE guibg=NONE
 hi LineNr     ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
+hi Comment cterm=italic
+let g:space_vim_dark_background = 234
 
 " ===
 " === airline

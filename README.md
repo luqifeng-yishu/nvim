@@ -5,12 +5,19 @@
 - neovim >= 4.0
 - python
 	- `pip3 install pynvim`
-	- `pip3 install python-language-server`
 - node.js
 	- `curl -sL install-node.now.sh/lts | bash`
+- yarn
+- xsel
 - ctags
 
 ---
+
+### Language Server
+- Python
+	- `pip3 install python-language-server`
+- C/C++
+	- [ccls](https://github.com/MaskRay/ccls)
 
 ### Install
 
@@ -19,6 +26,7 @@ git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
 mkdir ~/.config/nvim
 ln -sf ~/.rescld-nvim/autoload ~/.config/nvim/
 ln -sf ~/.rescld-nvim/init.vim ~/.config/nvim/
+ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim/
 ```
 
 ---
