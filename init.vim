@@ -52,11 +52,14 @@ endif
 " === other config
 " === 
 let mapleader = "," 
-map I $
 map <c-s> :w<CR>
 map <c-p> :FZF<CR>
 map R :source $MYVIMRC<CR>
 map <space><CR> :nohlsearch<CR>
+map <leader>rc :e ~/.config/nvim/init.vim<CR>
+map <leader>; A;<ESC>
+map <A-u> ^
+map <A-i> $
 inoremap qq <esc>
 filetype indent on
 
@@ -80,7 +83,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 " chxuan
 Plug 'chxuan/tagbar'
 Plug 'chxuan/vim-edit'
-Plug 'chxuan/prepare-code'
+" Plug 'chxuan/prepare-code'
 
 " airline
 Plug 'vim-airline/vim-airline'
@@ -130,6 +133,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -302,12 +309,12 @@ map <F5> :call Run()<CR>
 function! Run()
 	exec "w"
 	if &filetype == 'python'
-		:!python3 %
-		" set splitbelow
-		" :sp
-		" :terminal python3 %
+		" :!python3 %
+		set splitbelow
+		:sp
+		:terminal python3 %
 	elseif &filetype == 'html'
-		silent! exec "!google-chrome-stable % &"
+		silent! exec "!chromium % &"
 	elseif &filetype == 'markdown'
 		exec "MarkdownPreview"
 	elseif &filetype == 'cpp'
@@ -320,6 +327,10 @@ function! Run()
 		exec "!gcc % -Wall -o ./bin/%<"
 		:sp
 		:terminal ./bin/%<
+	elseif &filetype == 'go'
+		set splitbelow
+		:sp
+		:terminal go run %
 	elseif &filetype == 'java'
 		set splitbelow
 		exec "!find . -name '*.java' > temp"
@@ -383,6 +394,14 @@ let g:bookmark_save_per_working_dir = 1
 let g:bookmark_center = 1
 let g:bookmark_auto_close = 1
 let g:bookmark_location_list = 1
+
+" ===
+" === Snippets
+" ===
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-m>"
+let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
 
 " === 
 " === python path

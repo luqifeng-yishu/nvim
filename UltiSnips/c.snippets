@@ -1,0 +1,63 @@
+snippet #! "c init"
+#include<stdio.h>
+int main(int argc, char **argv){
+
+	${1}
+	printf("hello world\n");
+
+	return 0;
+}
+endsnippet
+
+snippet ! "cpp init"
+#include<iostream>
+using namespace std;
+int main(int argc, char **argv){
+	
+	${1}
+	cout << "hello world" << endl;
+
+	return 0;
+}
+endsnippet
+
+snippet if "if"
+if(${1:true}){
+	${2:code}
+}${3}
+endsnippet
+
+snippet switch "switch"
+switch(${1:expression}){
+	case ${2:constant-expression}:
+		${3:code-block}
+	case ${4:constant-expression}:
+		${5:code-block}
+	default:
+		${6:code-block}
+}
+endsnippet
+
+snippet while "while"
+while(${1:condition}){
+	${2:code-block}
+}${3}
+endsnippet
+
+snippet do "do-while"
+do{
+	${2:code-block}
+}while(${1:condition});
+endsnippet
+
+snippet for "for"
+for(${1:init}; ${2:condition}; ${3:increment}){
+	${4:code-block}
+}${5}
+endsnippet
+
+snippet struct "struct"
+typedef struct{
+	${2:code-block}
+}${1:name}
+endsnippet
