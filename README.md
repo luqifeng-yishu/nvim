@@ -26,7 +26,7 @@
 ### Install
 
 ```linux
-git clone https://github.com/rescld-code/nvim.git ~/.config/nvim
+git clone https://github.com/rescld-code/nvim.git ~/.rescld-nvim
 mkdir ~/.config/nvim
 ln -sf ~/.rescld-nvim/autoload ~/.config/nvim/
 ln -sf ~/.rescld-nvim/init.vim ~/.config/nvim/
