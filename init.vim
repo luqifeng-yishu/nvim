@@ -8,7 +8,7 @@
 " Author: rescld <root@rescld.cn>                  |
 " Repository: https://github.com/rescld-code/nvim  |
 " Create Date: 2019-11-20                          |
-" Update Date: 2020-02-08                          |
+" Update Date: 2020-03-01                          |
 "———————————————————————————————————————————————————
 
 set number
