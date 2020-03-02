@@ -39,15 +39,6 @@ set nowrap
 
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
 
-silent !mkdir -p ~/.config/nvim/tmp/backup
-silent !mkdir -p ~/.config/nvim/tmp/undo
-set backupdir=~/.config/nvim/tmp/backup,.
-set directory=~/.config/nvim/tmp/backup,.
-if has('persistent_undo')
-set undofile
-set undodir=~/.config/nvim/tmp/undo,.
-endif
-
 " === 
 " === other config
 " === 
@@ -56,7 +47,7 @@ map <c-s> :w<CR>
 map <c-p> :FZF<CR>
 map R :source $MYVIMRC<CR>
 map <space><CR> :nohlsearch<CR>
-map <leader>rc :e ~/.config/nvim/init.vim<CR>
+map <leader>vim :e ~/.config/nvim/init.vim<CR>
 map <leader>; A;<ESC>
 map <A-u> ^
 map <A-i> $
@@ -83,7 +74,6 @@ Plug 'MattesGroeger/vim-bookmarks'
 " chxuan
 Plug 'chxuan/tagbar'
 Plug 'chxuan/vim-edit'
-" Plug 'chxuan/prepare-code'
 
 " airline
 Plug 'vim-airline/vim-airline'
@@ -91,7 +81,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'theniceboy/bullets.vim'
 
 " git
@@ -124,6 +113,9 @@ Plug 'jelera/vim-javascript-syntax'
 
 " colorscheme
 Plug 'liuchengxu/space-vim-dark'
+
+" undo tree
+Plug 'mbbill/undotree'
 
 "NERDTree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -203,20 +195,44 @@ let g:bullets_enabled_file_types = [
 " ===
 " === coc
 " ===
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ coc#refresh()
+" inoremap <silent><expr> <TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ <SID>check_back_space() ? "\<TAB>" :
+" \ coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
-let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-snippets']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 function! s:check_back_space() abort
 let col = col('.') - 1
 return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 nmap <leader>rn <Plug>(coc-rename)
 nnoremap <leader>p :CocList -A --normal yank<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" ===
+" === coc-snippets && UltiSnips
+" ===
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+" let g:UltiSnipsExpandTrigger="<c-e>"
+" let g:UltiSnipsJumpForwardTrigger="<c-m>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
 
 " ===
 " === Python-syntax
@@ -337,7 +353,7 @@ function! Run()
 		exec "!javac -d bin/ @temp"
 		exec "!rm temp"
 		:sp
-		:terminal cd ~/java/bin/&&java Main
+		:terminal cd ./bin && java Main.Main
 	endif
 endfunction
 
@@ -396,12 +412,24 @@ let g:bookmark_auto_close = 1
 let g:bookmark_location_list = 1
 
 " ===
-" === Snippets
+" === undo tree
 " ===
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-m>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
+nmap L :UndotreeToggle<CR>
+noremap L :UndotreeToggle<CR>
+let g:undotree_DiffAutoOpen = 1
+let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_ShortIndicators = 1
+let g:undotree_WindowLayout = 2
+let g:undotree_DiffpanelHeight = 8
+let g:undotree_SplitWidth = 24
+silent !mkdir -p ~/.config/nvim/tmp/backup
+silent !mkdir -p ~/.config/nvim/tmp/undo
+set backupdir=~/.config/nvim/tmp/backup,.
+set directory=~/.config/nvim/tmp/backup,.
+if has("persistent_undo")
+	set undofile
+	set undodir=~/.config/nvim/tmp/undo,.
+endif
 
 " === 
 " === python path

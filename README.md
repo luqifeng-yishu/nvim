@@ -50,6 +50,16 @@ ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim/
 | `<F5>`        | Run code                   |
 | `<F4>`        | Create a terminal to right |
 
+#### coc.nvim
+| Shortcut      | Action                    |
+| :-            | :-                        |
+| `<leader>` rn | Symbol renaming.          |
+| `<leader>` p  | Yank history              |
+| `<leader>` d  | Goto code definition      |
+| `<leader>` y  | Goto code type definition |
+| `<leader>` i  | Goto code implementation  |
+| `<leader>` r  | Goto code references      |
+
 #### split window
 
 | Shortcut | Action                |
@@ -81,12 +91,13 @@ ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim/
 | `Ctrl` + n | Create a new cursor to next key |
 | `Ctrl` + x | Skip the key                    |
 
-#### UltiSnips
-| Shortcut   | Action                                           |
-| :-         | :-                                               |
-| `Ctrl` + e | Expand a snippet                                 |
-| `Ctrl` + n | (in snippet) Previous Cursor position in snippet |
-| `Ctrl` + m | (in snippet) Next Cursor position in snippet     |
+#### Snippet
+| Shortcut   | Action                       |
+| :-         | :-                           |
+| `Tab`      | Expand a snippet             |
+| `Ctrl` + l | trigger snippet expand       |
+| `Ctrl` + j | jump to next placeholder     |
+| `Ctrl` + k | jump to previous placeholder |
 
 #### vim-bookmarks
 
