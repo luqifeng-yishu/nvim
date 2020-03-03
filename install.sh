@@ -42,6 +42,8 @@ function print_logo(){
 # 在Arch系列安装
 function install_software_on_archlinux(){
 	yay -S vim neovim ctags python python-pip gcc jdk git ccls jdtls yarn xsel
+	mkdir ~/.pip
+	echo '[global]\nindex-url = https://pypi.tuna.tsinghua.edu.cn/simple' > ~/.pip/pip.conf
 	sudo pip install pynvim python-language-server
 	sudo curl -sL install-node.now.sh/lts | bash
 }
@@ -68,6 +70,10 @@ function install_on_linux(){
 function main(){
 	type=$(uname)
 	echo "Platform type: "${type}
+	echo ''
+	echo ''
+	echo ''
+	print_logo
 
 	if [ ${type} == "Linux" ]; then
 		install_on_linux
