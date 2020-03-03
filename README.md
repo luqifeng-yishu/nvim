@@ -92,7 +92,7 @@ cd ~/.rescld-nvim
 #### Snippet
 | Shortcut   | Action                       |
 | :-         | :-                           |
-| `Tab`      | Expand a snippet             |
+| `Ctrl` + e | Expand a snippet             |
 | `Ctrl` + l | trigger snippet expand       |
 | `Ctrl` + j | jump to next placeholder     |
 | `Ctrl` + k | jump to previous placeholder |

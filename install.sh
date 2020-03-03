@@ -13,8 +13,14 @@ function get_linux_distro(){
 
 # 拷贝文件
 function copy_files(){
+	mkdir ~/.pip
+	echo '[global]' >> ~/.pip/pip.conf
+	echo 'index-url = https://pypi.tuna.tsinghua.edu.cn/simple' >> ~/.pip/pip.conf
+
 	rm -rf ~/.config/nvim
 	mkdir -p ~/.config/nvim
+
+	ln -sf ~/.rescld-nvim/autoload ~/.config/nvim
 	ln -sf ~/.rescld-nvim/init.vim ~/.config/nvim
 	ln -sf ~/.rescld-nvim/UltiSnips ~/.config/nvim
 	ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim
@@ -45,11 +51,7 @@ function print_logo(){
 
 # 在Arch系列安装
 function install_software_on_archlinux(){
-	yay -Syyu vim neovim ctags python python-pip gcc jdk git ccls jdtls yarn xsel
-	mkdir ~/.pip
-	echo '[global]\nindex-url = https://pypi.tuna.tsinghua.edu.cn/simple' > ~/.pip/pip.conf
-	sudo pip install pynvim python-language-server
-	sudo curl -sL install-node.now.sh/lts | bash
+	yay -Syyu vim neovim ctags python python-pip gcc git yarn xsel
 }
 
 # 在Linux平台安装
@@ -68,6 +70,8 @@ function install_on_linux(){
 
 	copy_files
 	install_fonts_on_linux
+	sudo pip install pynvim python-language-server
+	sudo curl -sL install-node.now.sh/lts | bash
 }
 
 
@@ -75,9 +79,6 @@ function install_on_linux(){
 function main(){
 	type=$(uname)
 	echo "Platform type: "${type}
-	echo ''
-	echo ''
-	echo ''
 	print_logo
 
 	if [ ${type} == "Linux" ]; then

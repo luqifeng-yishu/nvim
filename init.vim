@@ -11,13 +11,6 @@
 " Update Date: 2020-03-03                          |
 "———————————————————————————————————————————————————
 
-" ===
-" === Auto load for first time uses
-" ===
-if empty(glob('~/.config/nvim/plugged'))
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 set number
 set clipboard+=unnamedplus " yay -S xsel
 set nofoldenable
@@ -58,6 +51,13 @@ map <A-u> ^
 map <A-i> $
 inoremap qq <esc>
 filetype indent on
+
+" ===
+" === Auto load for first time uses
+" ===
+if empty(glob('~/.config/nvim/plugged'))
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.config/nvim/plugged')
 
