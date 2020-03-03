@@ -4,6 +4,8 @@
 function get_linux_distro(){
 	if grep -Eq "Arch Linux" /etc/*-release; then
 		echo "ArchLinux"
+	elif grep -Eq "Manjaro Linux" /etc/*-release; then
+		echo "ManjaroLinux"
 	else
 		echo "Unknow"
 	fi
@@ -11,6 +13,8 @@ function get_linux_distro(){
 
 # 拷贝文件
 function copy_files(){
+	rm -rf ~/.config/nvim
+	mkdir -p ~/.config/nvim
 	ln -sf ~/.rescld-nvim/init.vim ~/.config/nvim
 	ln -sf ~/.rescld-nvim/UltiSnips ~/.config/nvim
 	ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim
@@ -41,7 +45,7 @@ function print_logo(){
 
 # 在Arch系列安装
 function install_software_on_archlinux(){
-	yay -S vim neovim ctags python python-pip gcc jdk git ccls jdtls yarn xsel
+	yay -Syyu vim neovim ctags python python-pip gcc jdk git ccls jdtls yarn xsel
 	mkdir ~/.pip
 	echo '[global]\nindex-url = https://pypi.tuna.tsinghua.edu.cn/simple' > ~/.pip/pip.conf
 	sudo pip install pynvim python-language-server
@@ -59,6 +63,7 @@ function install_on_linux(){
 		install_software_on_archlinux
 	else
 		echo "Not support Linux distro: "${distro}
+		exit
 	fi
 
 	copy_files
@@ -79,6 +84,7 @@ function main(){
 		install_on_linux
 	else
 		echo "Not support platform type: "${type}
+		exit
 	fi
 
 	print_logo
