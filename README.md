@@ -27,11 +27,8 @@
 
 ```linux
 git clone https://github.com/rescld-code/nvim.git ~/.rescld-nvim
-mkdir ~/.config/nvim
-ln -sf ~/.rescld-nvim/autoload ~/.config/nvim/
-ln -sf ~/.rescld-nvim/init.vim ~/.config/nvim/
-ln -sf ~/.rescld-nvim/UltiSnips ~/.config/nvim/
-ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim/
+cd ~/.rescld-nvim
+./install.sh
 ```
 
 ---
@@ -43,6 +40,7 @@ ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim/
 | `<leader>`    | `,`                        |
 | `<leader>` n  | NERDTreeToggle             |
 | `<leader>` m  | TagbarToggle               |
+| `<leader>` f  | Open ranger                |
 | `<leader>` sp | Spelling check             |
 | `Ctrl` + x    | Modifying word             |
 | `Ctrl` + p    | Open FZF                   |
@@ -55,10 +53,10 @@ ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim/
 | :-            | :-                        |
 | `<leader>` rn | Symbol renaming.          |
 | `<leader>` p  | Yank history              |
-| `<leader>` d  | Goto code definition      |
-| `<leader>` y  | Goto code type definition |
-| `<leader>` i  | Goto code implementation  |
-| `<leader>` r  | Goto code references      |
+| gd            | Goto code definition      |
+| gt            | Goto code type definition |
+| gi            | Goto code implementation  |
+| gr            | Goto code references      |
 
 #### split window
 

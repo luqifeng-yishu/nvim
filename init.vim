@@ -8,8 +8,17 @@
 " Author: rescld <root@rescld.cn>                  |
 " Repository: https://github.com/rescld-code/nvim  |
 " Create Date: 2019-11-20                          |
-" Update Date: 2020-03-01                          |
+" Update Date: 2020-03-03                          |
 "———————————————————————————————————————————————————
+
+" ===
+" === Auto load for first time uses
+" ===
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 set number
 set clipboard+=unnamedplus " yay -S xsel
@@ -47,8 +56,6 @@ map <c-s> :w<CR>
 map <c-p> :FZF<CR>
 map R :source $MYVIMRC<CR>
 map <space><CR> :nohlsearch<CR>
-map <leader>vim :e ~/.config/nvim/init.vim<CR>
-map <leader>; A;<ESC>
 map <A-u> ^
 map <A-i> $
 inoremap qq <esc>
@@ -56,20 +63,27 @@ filetype indent on
 
 call plug#begin('~/.config/nvim/plugged')
 
-" navigation
-Plug 'francoiscabrol/ranger.vim'
-Plug 'nine2/vim-indent-guides'
-Plug 'Yggdroot/indentLine'
-Plug 'junegunn/vim-peekaboo'
-Plug 'ryanoasis/vim-devicons'
+" editor enhancement
 Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-commentary'
 Plug 'godlygeek/tabular'
 Plug 'rhysd/clever-f.vim'
-Plug 'mhinz/vim-startify'
-Plug 'itchyny/vim-cursorword'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'MattesGroeger/vim-bookmarks'
+
+" visual enhancement
+Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/vim-peekaboo'
+Plug 'itchyny/vim-cursorword'
+Plug 'ryanoasis/vim-devicons'
+
+" indent
+Plug 'nine2/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
+
+" vim + ranger
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
 
 " chxuan
 Plug 'chxuan/tagbar'
@@ -160,7 +174,7 @@ let g:airline_right_alt_sep = ''
 " ===
 " === MarkdownPreview
 " ===
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 let g:mkdp_refresh_slow = 0
 let g:mkdp_command_for_global = 0
@@ -195,13 +209,13 @@ let g:bullets_enabled_file_types = [
 " ===
 " === coc
 " ===
-" inoremap <silent><expr> <TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ <SID>check_back_space() ? "\<TAB>" :
-" \ coc#refresh()
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent><expr> <c-space> coc#refresh()
-let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-snippets']
+let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-snippets', 'coc-translator']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 function! s:check_back_space() abort
@@ -209,27 +223,28 @@ let col = col('.') - 1
 return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+nmap ts <Plug>(coc-translator-p)
 nmap <leader>rn <Plug>(coc-rename)
-nnoremap <leader>p :CocList -A --normal yank<CR>
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nnoremap <leader>p :CocList -A --normal yank<CR>
 
 " ===
 " === coc-snippets && UltiSnips
 " ===
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-" let g:UltiSnipsExpandTrigger="<c-e>"
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+let g:UltiSnipsExpandTrigger="<c-e>"
 " let g:UltiSnipsJumpForwardTrigger="<c-m>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-n>"
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
@@ -324,9 +339,9 @@ nnoremap <right> :vertical resize+5<CR>
 map <F5> :call Run()<CR>
 function! Run()
 	exec "w"
+	set splitbelow
 	if &filetype == 'python'
 		" :!python3 %
-		set splitbelow
 		:sp
 		:terminal python3 %
 	elseif &filetype == 'html'
@@ -334,26 +349,25 @@ function! Run()
 	elseif &filetype == 'markdown'
 		exec "MarkdownPreview"
 	elseif &filetype == 'cpp'
-		set splitbelow
 		exec "!g++ % -Wall -o ./bin/%<"
 		:sp
 		:terminal ./bin/%<
 	elseif &filetype == 'c'
-		set splitbelow
 		exec "!gcc % -Wall -o ./bin/%<"
 		:sp
 		:terminal ./bin/%<
 	elseif &filetype == 'go'
-		set splitbelow
 		:sp
 		:terminal go run %
 	elseif &filetype == 'java'
-		set splitbelow
 		exec "!find . -name '*.java' > temp"
 		exec "!javac -d bin/ @temp"
 		exec "!rm temp"
 		:sp
 		:terminal cd ./bin && java Main.Main
+	elseif &filetype == 'sh'
+		:sp
+		:terminal bash %
 	endif
 endfunction
 
@@ -414,7 +428,6 @@ let g:bookmark_location_list = 1
 " ===
 " === undo tree
 " ===
-nmap L :UndotreeToggle<CR>
 noremap L :UndotreeToggle<CR>
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
