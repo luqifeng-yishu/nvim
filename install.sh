@@ -18,17 +18,17 @@ function copy_files(){
 	rm -rf ~/.config/nvim
 	mkdir -p ~/.config/nvim
 
-	ln -sf ${PWD}/.rescld-nvim/autoload ~/.config/nvim
-	ln -sf ${PWD}/.rescld-nvim/init.vim ~/.config/nvim
-	ln -sf ${PWD}/.rescld-nvim/config ~/.config/nvim
-	ln -sf ${PWD}/.rescld-nvim/UltiSnips ~/.config/nvim
-	ln -sf ${PWD}/.rescld-nvim/coc-settings.json ~/.config/nvim
+	ln -sf ${PWD}/autoload ~/.config/nvim
+	ln -sf ${PWD}/init.vim ~/.config/nvim
+	ln -sf ${PWD}/config ~/.config/nvim
+	ln -sf ${PWD}/UltiSnips ~/.config/nvim
+	ln -sf ${PWD}/coc-settings.json ~/.config/nvim
 }
 
 function install_fonts_on_linux(){
     mkdir -p ~/local/share/fonts
     rm -rf ~/.local/share/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf
-    cp ${PWD}/.rescld-nvim/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/.local/share/fonts
+    cp ${PWD}/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/.local/share/fonts
     fc-cache -vf ~/.local/share/fonts
 }
 
