@@ -20,6 +20,7 @@ function copy_files(){
 
 	ln -sf ~/.rescld-nvim/autoload ~/.config/nvim
 	ln -sf ~/.rescld-nvim/init.vim ~/.config/nvim
+	ln -sf ~/.rescld-nvim/config ~/.config/nvim
 	ln -sf ~/.rescld-nvim/UltiSnips ~/.config/nvim
 	ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim
 }
@@ -68,7 +69,6 @@ function install_on_linux(){
 	sudo pip install pynvim python-language-server
 	sudo curl -sL install-node.now.sh/lts | bash
 }
-
 
 function main(){
 	type=$(uname)
