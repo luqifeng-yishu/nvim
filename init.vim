@@ -8,7 +8,7 @@
 " Author: rescld <root@rescld.cn>                  |
 " Repository: https://github.com/rescld-code/nvim  |
 " Create Date: 2019-11-20                          |
-" Update Date: 2020-03-03                          |
+" Update Date: 2020-03-04                          |
 "———————————————————————————————————————————————————
 
 set number
@@ -221,12 +221,24 @@ let col = col('.') - 1
 return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" popup
 nmap ts <Plug>(coc-translator-p)
-nmap <leader>rn <Plug>(coc-rename)
+vmap ts <Plug>(coc-translator-pv)
+" echo
+nmap te <Plug>(coc-translator-e)
+vmap te <Plug>(coc-translator-ev)
+" replace
+nmap tr <Plug>(coc-translator-r)
+vmap tr <Plug>(coc-translator-rv)
+" history
+map th :CocList translation<CR>
+
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
+
+nmap <leader>rn <Plug>(coc-rename)
 nnoremap <leader>p :CocList -A --normal yank<CR>
 
 " ===
