@@ -4,7 +4,7 @@ function get_linux_distro(){
 	if grep -Eq "Arch Linux" /etc/*-release; then
 		echo "ArchLinux"
 	elif grep -Eq "Manjaro Linux" /etc/*-release; then
-		echo "ManjaroLinux"
+		echo "Manjaro"
 	else
 		echo "Unknow"
 	fi
@@ -56,7 +56,7 @@ function install_on_linux(){
 
 	if [ ${distro} == "ArchLinux" ]; then
 		install_software_on_archlinux
-	elif [ ${distro} == "ManjaroLinux" ]; then
+	elif [ ${distro} == "Manjaro" ]; then
 		install_software_on_archlinux
 	else
 		echo "Not support Linux distro: "${distro}
