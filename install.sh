@@ -18,17 +18,17 @@ function copy_files(){
 	rm -rf ~/.config/nvim
 	mkdir -p ~/.config/nvim
 
-	ln -sf ~/.rescld-nvim/autoload ~/.config/nvim
-	ln -sf ~/.rescld-nvim/init.vim ~/.config/nvim
-	ln -sf ~/.rescld-nvim/config ~/.config/nvim
-	ln -sf ~/.rescld-nvim/UltiSnips ~/.config/nvim
-	ln -sf ~/.rescld-nvim/coc-settings.json ~/.config/nvim
+	ln -sf ${PWD}/.rescld-nvim/autoload ~/.config/nvim
+	ln -sf ${PWD}/.rescld-nvim/init.vim ~/.config/nvim
+	ln -sf ${PWD}/.rescld-nvim/config ~/.config/nvim
+	ln -sf ${PWD}/.rescld-nvim/UltiSnips ~/.config/nvim
+	ln -sf ${PWD}/.rescld-nvim/coc-settings.json ~/.config/nvim
 }
 
 function install_fonts_on_linux(){
-    mkdir -p ~/.local/share/fonts
+    mkdir -p ${PWD}/local/share/fonts
     rm -rf ~/.local/share/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf
-    cp ~/.rescld-nvim/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/.local/share/fonts
+    cp ${PWD}/.rescld-nvim/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/.local/share/fonts
     fc-cache -vf ~/.local/share/fonts
 }
 
@@ -36,19 +36,18 @@ function print_logo(){
 	color="$(tput setaf 6)"
 	normal="$(tput sgr0)"
 	printf "${color}"
-	echo '                                               '
-	echo ' ____    _____   ____     ____   _       ____  '
-	echo '|  _ \  | ____| / ___|   / ___| | |     |  _ \ '
-	echo '| |_) | |  _|   \___ \  | |     | |     | | | |'
-	echo '|  _ <  | |___   ___) | | |___  | |___  | |_| |'
-	echo '|_| \_\ |_____| |____/   \____| |_____| |____/ '
-	echo '                                               '
+	echo '                                                              '
+	echo '  ____                _     _       _   ___     _____ __  __  '
+	echo ' |  _ \ ___  ___  ___| | __| |     | \ | \ \   / /_ _|  \/  | '
+	echo ' | |_) / _ \/ __|/ __| |/ _` |_____|  \| |\ \ / / | || |\/| | '
+	echo ' |  _ <  __/\__ \ (__| | (_| |_____| |\  | \ V /  | || |  | | '
+	echo ' |_| \_\___||___/\___|_|\__,_|     |_| \_|  \_/  |___|_|  |_| '
+	echo '                                                              '
 	printf "${normal}"
 }
 
 function install_software_on_archlinux(){
 	yay -Syyu vim neovim ctags python python-pip gcc git yarn xsel curl
-	curl -sL install-node.now.sh/lts | bash
 }
 
 function install_on_linux(){
@@ -66,8 +65,8 @@ function install_on_linux(){
 
 	copy_files
 	install_fonts_on_linux
-	sudo pip install pynvim python-language-server
-	sudo curl -sL install-node.now.sh/lts | bash
+	sudo -E pip install pynvim python-language-server
+	sudo -E curl -sL install-node.now.sh/lts | bash
 }
 
 function main(){
