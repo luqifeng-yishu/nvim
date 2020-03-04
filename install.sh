@@ -26,7 +26,7 @@ function copy_files(){
 }
 
 function install_fonts_on_linux(){
-    mkdir -p ${PWD}/local/share/fonts
+    mkdir -p ~/local/share/fonts
     rm -rf ~/.local/share/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf
     cp ${PWD}/.rescld-nvim/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/.local/share/fonts
     fc-cache -vf ~/.local/share/fonts
