@@ -8,15 +8,8 @@
 " Author: rescld <root@rescld.cn>                  |
 " Repository: https://github.com/rescld-code/nvim  |
 " Create Date: 2019-11-20                          |
-" Update Date: 2020-03-04                          |
+" Update Date: 2020-03-05                          |
 "———————————————————————————————————————————————————
-
-" ===
-" === Auto load for first time uses
-" ===
-if empty(glob('~/.config/nvim/plugged'))
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 " self defined
 source ~/.config/nvim/config/self.vim

@@ -47,7 +47,7 @@ function print_logo(){
 }
 
 function install_software_on_archlinux(){
-	yay -Syyu vim neovim ctags python python-pip gcc git yarn xsel curl
+	yay -S vim neovim ctags python python-pip gcc git yarn xsel curl tar zip unarchiver unzip gzip ntfs-3g
 }
 
 function install_on_linux(){

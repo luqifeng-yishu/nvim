@@ -5,9 +5,10 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " editor enhancement
-Plug 'jiangmiao/auto-pairs'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
 Plug 'rhysd/clever-f.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'MattesGroeger/vim-bookmarks'
 
@@ -19,12 +20,12 @@ Plug 'itchyny/vim-cursorword'
 Plug 'ryanoasis/vim-devicons'
 
 " indent
-Plug 'nine2/vim-indent-guides'
 Plug 'Yggdroot/indentLine'
+Plug 'nine2/vim-indent-guides'
 
 " vim + ranger
-Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim'
 
 " chxuan
 Plug 'chxuan/tagbar'
@@ -39,32 +40,36 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'f
 Plug 'theniceboy/bullets.vim'
 
 " git
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Snippets
+" Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " python
 Plug 'tmhedberg/SimpylFold'
-Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
-Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim'
+Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
+Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 
 " cpp
 Plug 'octol/vim-cpp-enhanced-highlight'
 
 " HTML, CSS, JavaScript, JSON, etc.
+Plug 'yuezk/vim-js'
 Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'html','javascript', 'css', 'less'] }
-Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
-Plug 'yuezk/vim-js'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
+Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'html','javascript', 'css', 'less'] }
 
 " colorscheme
 Plug 'liuchengxu/space-vim-dark'
@@ -72,20 +77,23 @@ Plug 'liuchengxu/space-vim-dark'
 " undo tree
 Plug 'mbbill/undotree'
 
-"NERDTree
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " fzf
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-Plug 'junegunn/fzf'
-
-" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 call plug#end()
 
-" plug config
-source ~/.config/nvim/config/config.vim
+
+" ===
+" === Auto load for first time uses
+" ===
+if empty(glob('~/.config/nvim/plugged'))
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+else
+	" plug config
+	source ~/.config/nvim/config/config.vim
+endif

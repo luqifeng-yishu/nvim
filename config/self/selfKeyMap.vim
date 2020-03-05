@@ -16,6 +16,7 @@ filetype indent on
 " ===
 nnoremap <c-m> :bprevious<cr>
 nnoremap <c-n> :bNext<cr>
+nnoremap <leader>bd :bd<CR>
 
 " ===
 " === find next
