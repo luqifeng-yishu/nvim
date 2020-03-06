@@ -80,6 +80,7 @@ function main(){
 		exit
 	fi
 
+	nvim
 	print_logo
 }
 

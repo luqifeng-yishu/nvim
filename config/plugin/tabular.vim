@@ -1,6 +1,6 @@
 " ===
 " === tabular
 " ===
-nnoremap <leader>l :Tab /\|<cr>
-nnoremap <leader>= :Tab /=<cr>
+nnoremap <leader>l :Tabularize /\|<cr>
+nnoremap <leader>= :Tabularize /=<cr>
 

@@ -3,12 +3,17 @@
 " ====================================== "
 
 let mapleader = "," 
-map <c-s> :w<CR>
-map <c-p> :FZF<CR>
-map <space><CR> :nohlsearch<CR>
 map <A-u> ^
 map <A-i> $
+map <c-s> :w<CR>
+map <c-p> :FZF<CR>
+map <leader>+ a<++><esc>
+map <c-f> :CocList files<CR>
+map <space><CR> :nohlsearch<CR>
+map <leader>r :source $MYVIMRC<CR>
+
 inoremap qq <esc>
+
 filetype indent on
 
 " ===
@@ -41,11 +46,6 @@ nnoremap <right> :vertical resize+5<CR>
 " === Run code
 " ===
 map <F5> :call RunCode()<CR>
-
-" ===
-" === terminal
-" ===
-map <F4> :set splitright<CR>:vsp<CR>:terminal<CR>i
 
 " ===
 " === tab

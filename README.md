@@ -36,32 +36,39 @@ cd ~/.rescld-nvim
 ### Plugin List
 
 - editor enhancement
+	- [vim-edit](https://github.com/chxuan/vim-edit)
 	- [tabular](https://github.com/godlygeek/tabular)
 	- [surround](https://github.com/tpope/vim-surround)
+	- [wildfire.vim](https://github.com/gcmt/wildfire.vim)
 	- [auto-pairs](https://github.com/jiangmiao/auto-pairs)
 	- [clever-f.vim](https://github.com/rhysd/clever-f.vim)
 	- [vim-bookmarks](https://github.com/MattesGroeger/vim-bookmarks)
 	- [vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors)
 - visual enhancement
+	- [rainbow](https://github.com/luochen1990/rainbow)
 	- [vim-startify](https://github.com/mhinz/vim-startify)
 	- [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
 	- [vim-devicons](https://github.com/ryanoasis/vim-devicons)
 	- [vim-commentary](https://github.com/tpope/vim-commentary)
 	- [vim-cursorword](https://github.com/itchyny/vim-cursorword)
+- taglist
+	- [vista.vim](https://github.com/liuchengxu/vista.vim)
+- find
+	- [far.vim](https://github.com/brooth/far.vim)
+- repl
+	- [repl](https://github.com/rhysd/reply.vim)
 - indent
 	- [indentLine](https://github.com/Yggdroot/indentLine)
 	- [vim-indent-guides](https://github.com/nine2/vim-indent-guides)
 - ranger
 	- [ranger](https://github.com/francoiscabrol/ranger.vim)
 	- [bclose.vim](https://github.com/rbgrouleff/bclose.vim)
-- chxuan
-	- [tagbar](https://github.com/chxuan/tagbar)
-	- [vim-edit](https://github.com/chxuan/vim-edit)
 - airline
 	- [vim-airline](https://github.com/vim-airline/vim-airline)
 	- [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
 - markdown
 	- [bullets.vim](https://github.com/theniceboy/bullets.vim)
+	- [vim-table-mode](https://github.com/dhruvasagar/vim-table-mode)
 	- [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim')
 - git
 	- [gv.vim](https://github.com/junegunn/gv.vim)
@@ -103,75 +110,83 @@ cd ~/.rescld-nvim
 
 ### Keyboard Shortcuts
 
-| Shortcut      | Action                     |
-| :-            | :-                         |
-| `<leader>`    | `,`                        |
-| `<leader>` n  | NERDTreeToggle             |
-| `<leader>` m  | TagbarToggle               |
-| `<leader>` f  | Open ranger                |
-| `<leader>` sp | Spelling check             |
-| `Ctrl` + x    | Modifying word             |
-| `Ctrl` + p    | Open FZF                   |
-| `Ctrl` + s    | Save                       |
-| `Alt` + u     | Go to the top of the line  |
-| `Alt` + i     | Go to the end of the line  |
-| `<F5>`        | Run code                   |
-| `<F4>`        | Create a terminal to right |
-| L             | Open undoTree              |
+| Shortcut        | Action                          |
+| --------------- | ----------------------------    |
+| `<leader>`      | `,`                             |
+| `<leader>` n    | NERDTree Toggle                 |
+| `<leader>` m    | Tagbar Toggle                   |
+| `<leader>` f    | Open ranger                     |
+| `<leader>` [    | Quickly select the closest text |
+| `<leader>` sp   | Spelling check                  |
+| `<leader>` tm   | Table mode toggle               |
+| `Ctrl` + x      | Modifying word                  |
+| `Ctrl` + p      | Open FZF                        |
+| `Ctrl` + s      | Save                            |
+| `Alt` + u       | Go to the top of the line       |
+| `Alt` + i       | Go to the end of the line       |
+| `<F5>`          | Run code                        |
+| `<F4>`          | Create a terminal to right      |
+| L               | Open undoTree                   |
 
 #### Coc.nvim
-| Shortcut      | Action                      |
-| :-            | :-                          |
-| `<leader>` p  | Yank history                |
-| `<leader>` rn | Symbol renaming.            |
+| Shortcut      | Action           |
+|---------------|------------------|
+| `<leader>` p  | Yank history     |
+| `<leader>` rn | Symbol renaming. |
 
 ##### coc-calc
 | Shortcut      | Action                      |
-| :-            | :-                          |
+|---------------|-----------------------------|
 | `<leader>` ca | Calculate result to append  |
 | `<leader>` cr | Calculate result to replace |
 
 ##### Goto code
-| Shortcut      | Action                      |
-| :-            | :-                          |
-| gd            | Goto code definition        |
-| gt            | Goto code type definition   |
-| gi            | Goto code implementation    |
-| gr            | Goto code references        |
+| Shortcut | Action                    |
+|----------|---------------------------|
+| gd       | Goto code definition      |
+| gt       | Goto code type definition |
+| gi       | Goto code implementation  |
+| gr       | Goto code references      |
 
 ##### coc-translator
-| Shortcut      | Action                      |
-| :-            | :-                          |
-| ts            | Translator popup            |
-| te            | Translator echo             |
-| tr            | Translator replace          |
-| th            | Translator history          |
+| Shortcut | Action             |
+| :-       | :-                 |
+| ts       | Translator popup   |
+| te       | Translator echo    |
+| tr       | Translator replace |
+| th       | Translator history |
 
 ##### Snippet
-| Shortcut   | Action                       |
-| :-         | :-                           |
-| `Tab`      | Expand a snippet             |
-| `Ctrl` + l | trigger snippet expand       |
-| `Ctrl` + j | jump to next placeholder     |
-| `Ctrl` + k | jump to previous placeholder |
+| Shortcut      | Action                   |
+|---------------|--------------------------|
+| `Tab`         | Expand a snippet         |
+| `Ctrl` + l    | trigger snippet expand   |
+| `Ctrl` + j    | jump to next placeholder |
+
+#### Repl
+| Shortcut | Action     |
+|----------|------------|
+| `F10`    | Repl begin |
+| `F11`    | Send code  |
+| `F12`    | Repl end   |
 
 #### Tabular
 | Shortcut     | Action               |
-| :-           | :-                   |
+|--------------|----------------------|
 | `<leader>` l | Aligns table         |
 | `<leader>` = | Aligns text with '=' |
 
 #### split window
 
 | Shortcut | Action                |
-| :-       | :-                    |
+|----------|-----------------------|
 | su       | Split screen to right |
 | si       | Split screen to below |
 
 #### buffers
 
 | Shortcut      | Action              |
-| :-            | :-                  |
+|---------------|---------------------|
 | `Ctrl` + n    | Go one buffer left  |
 | `Ctrl` + m    | Go one buffer right |
 | `<leader>` bd | Delete the buffer   |
@@ -179,16 +194,16 @@ cd ~/.rescld-nvim
 #### remove cursor
 
 | Shortcut   | Action                       |
-| :-         | :-                           |
+|------------|------------------------------|
 | `Ctrl` + h | Move cursor one window left  |
 | `Ctrl` + j | Move cursor one window down  |
 | `Ctrl` + k | Move cursor one window up    |
-| `Ctrl` + l | Move cursor one window right | 
+| `Ctrl` + l | Move cursor one window right |
 
 #### vim-multiple-cursors
 
 | Shortcut   | Action                          |
-| :-         | :-                              |
+|------------|---------------------------------|
 | `Ctrl` + t | Start                           |
 | `Ctrl` + n | Create a new cursor to next key |
 | `Ctrl` + x | Skip the key                    |
@@ -196,7 +211,7 @@ cd ~/.rescld-nvim
 #### vim-bookmarks
 
 | Shortcut     | Action                                        |
-| :-           | :-                                            |
+|--------------|-----------------------------------------------|
 | ma           | Add/remove bookmark at current line           |
 | mn           | Jump to next bookmark in buffer               |
 | mp           | Jump to previous bookmark in buffer           |

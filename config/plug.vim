@@ -5,7 +5,9 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " editor enhancement
+Plug 'chxuan/vim-edit'
 Plug 'godlygeek/tabular'
+Plug 'gcmt/wildfire.vim'
 Plug 'tpope/vim-surround'
 Plug 'rhysd/clever-f.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -14,10 +16,14 @@ Plug 'MattesGroeger/vim-bookmarks'
 
 " visual enhancement
 Plug 'mhinz/vim-startify'
+Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-peekaboo'
 Plug 'itchyny/vim-cursorword'
 Plug 'ryanoasis/vim-devicons'
+
+" repl
+Plug 'rhysd/reply.vim', { 'on': ['Repl', 'ReplAuto'] }
 
 " indent
 Plug 'Yggdroot/indentLine'
@@ -27,17 +33,17 @@ Plug 'nine2/vim-indent-guides'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
 
-" chxuan
-Plug 'chxuan/tagbar'
-Plug 'chxuan/vim-edit'
+" Taglist
+Plug 'liuchengxu/vista.vim'
 
 " airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'theniceboy/bullets.vim'
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 
 " git
 Plug 'junegunn/gv.vim'
@@ -81,7 +87,8 @@ Plug 'mbbill/undotree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
-" fzf
+" find
+Plug 'brooth/far.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 
