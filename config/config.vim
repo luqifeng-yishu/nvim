@@ -20,4 +20,3 @@ source ~/.config/nvim/config/plugin/colorscheme.vim
 source ~/.config/nvim/config/plugin/vim-bookmarks.vim
 source ~/.config/nvim/config/plugin/vim-table-mode.vim
 source ~/.config/nvim/config/plugin/vim-multiple-cursors.vim
-

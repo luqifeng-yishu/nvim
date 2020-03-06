@@ -79,6 +79,7 @@ Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'html','javascript', 'css', 'le
 
 " colorscheme
 Plug 'liuchengxu/space-vim-dark'
+Plug 'mhartington/oceanic-next'
 
 " undo tree
 Plug 'mbbill/undotree'
@@ -101,6 +102,6 @@ call plug#end()
 if empty(glob('~/.config/nvim/plugged'))
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 else
-	" plug config
+	" plugin config
 	source ~/.config/nvim/config/config.vim
 endif

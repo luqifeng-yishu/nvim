@@ -47,7 +47,7 @@ function print_logo(){
 }
 
 function install_software_on_archlinux(){
-	yay -S vim neovim ctags python python-pip gcc git yarn xsel curl tar zip unarchiver unzip gzip ntfs-3g
+	yay -S vim neovim ctags ranger fzf python python-pip gcc git yarn xsel curl tar zip unarchiver unzip gzip ntfs-3g
 }
 
 function install_on_linux(){
@@ -75,12 +75,13 @@ function main(){
 
 	if [ ${type} == "Linux" ]; then
 		install_on_linux
+		nvim
+		clear
 	else
 		echo "Not support platform type: "${type}
 		exit
 	fi
 
-	nvim
 	print_logo
 }
 

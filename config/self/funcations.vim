@@ -34,3 +34,7 @@ function! RunCode()
 		:terminal bash %
 	endif
 endfunction
+
+function OpenVista() abort
+	
+endfunction
