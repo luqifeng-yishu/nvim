@@ -11,9 +11,9 @@ function get_linux_distro(){
 }
 
 function copy_files(){
-	rm ~/.pip/
+	rm ~/.pip
 	mkdir ~/.pip
-	echo '[global]' >> ~/.pip/pip.conf
+	echo '[global]' > ~/.pip/pip.conf
 	echo 'index-url = https://pypi.tuna.tsinghua.edu.cn/simple' >> ~/.pip/pip.conf
 
 	rm -rf ~/.config/nvim
