@@ -69,3 +69,10 @@ function! s:check_back_space() abort
 endfunction
 " let g:coc_snippet_next = '<tab>'
 
+" ===
+" === Formatting selected code.
+" ===
+xmap <leader>z  <Plug>(coc-format-selected)
+nmap <leader>z  <Plug>(coc-format-selected)
+xmap <leader>Z  ggVG<Plug>(coc-format-selected)
+nmap <leader>Z  ggVG<Plug>(coc-format-selected)

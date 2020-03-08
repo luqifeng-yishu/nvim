@@ -96,6 +96,7 @@ cd ~/.rescld-nvim
 	- [vim-jsx-pretty](https://github.com/MaxMEllon/vim-jsx-pretty)
 	- [vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax)
 - colorscheme
+	- [oceanic-next](https://github.com/mhartington/oceanic-next)
 	- [space-vim-dark](https://github.com/liuchengxu/space-vim-dark)
 - undo tree
 	- [undotree](https://github.com/mbbill/undotree)
@@ -162,6 +163,12 @@ cd ~/.rescld-nvim
 | `Tab`         | Expand a snippet         |
 | `Ctrl` + l    | trigger snippet expand   |
 | `Ctrl` + j    | jump to next placeholder |
+
+##### format
+| Shortcut     | Action                   |
+|--------------|--------------------------|
+| `<leader>` z | Formatting selected code |
+| `<leader>` Z | Formatting file code     |
 
 #### Repl
 | Shortcut | Action     |
