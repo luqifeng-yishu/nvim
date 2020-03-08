@@ -11,6 +11,7 @@ function get_linux_distro(){
 }
 
 function copy_files(){
+	rm ~/.pip/
 	mkdir ~/.pip
 	echo '[global]' >> ~/.pip/pip.conf
 	echo 'index-url = https://pypi.tuna.tsinghua.edu.cn/simple' >> ~/.pip/pip.conf
@@ -47,7 +48,7 @@ function print_logo(){
 }
 
 function install_software_on_archlinux(){
-	pacman -S vim neovim ctags ranger fzf python python-pip gcc git yarn xsel curl tar zip unarchiver unzip gzip ntfs-3g
+	sudo pacman -S vim neovim ctags ranger fzf python python-pip gcc git yarn xsel curl tar zip unarchiver unzip gzip ntfs-3g
 }
 
 function install_on_linux(){
@@ -65,7 +66,7 @@ function install_on_linux(){
 
 	copy_files
 	install_fonts_on_linux
-	sudo -E pip install pynvim python-language-server
+	sudo -E pip install pynvim python-language-server jedi pylint
 	sudo -E curl -sL install-node.now.sh/lts | bash
 }
 
